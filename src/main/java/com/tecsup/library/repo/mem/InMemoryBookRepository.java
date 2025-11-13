@@ -1,0 +1,23 @@
+package com.tecsup.library.repo.mem;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import com.tecsup.library.model.Book;
+import com.tecsup.library.repo.BookRepository;
+
+public class InMemoryBookRepository implements BookRepository {
+
+    private final Map<String, Book> data = new HashMap<>();
+
+    @Override
+    public Optional<Book> findByIsbn(String isbn) {
+        return Optional.ofNullable(data.get(isbn));
+    }
+
+    @Override
+    public void save(Book book) {
+        data.put(book.getIsbn(), book);
+    }
+}
